@@ -1,0 +1,66 @@
+import java.util.*;
+class StringOperations{
+        String s1="Utkarsh";
+        String s2="Gupta";
+        String name= s1+" "+s2;
+        String name1= s1.concat(" ").concat(s2);
+        String name2= s1.concat(s2);
+
+    public static void main(String[] args){
+        StringOperations obj= new StringOperations();
+        System.out.println("name: "+obj.name);
+        System.out.println("name1: "+obj.name1);
+        System.out.println("name2: "+obj.name2);
+        System.out.println("length of name: "+obj.name.length());
+        System.out.println("length of name1: "+obj.name1.length());
+        System.out.println("length of name2: "+obj.name2.length());
+        System.out.println("char at index 3 in name: "+obj.name.charAt(3));
+        System.out.println("char at index 4 in name1: "+obj.name1.charAt(4));
+        System.out.println("char at index 5 in name2: "+obj.name2.charAt(5));
+        System.out.println("index of 't' in name: "+obj.name.indexOf('t'));
+        System.out.println("index of 't' in name1: "+obj.name1.indexOf('t'));
+        System.out.println("index of 't' in name2: "+obj.name2.indexOf('t'));
+        System.out.println("substring of name from index 2 to 5: "+obj.name.substring(2, 5));
+        System.out.println("substring of name1 from index 1 to 4: "+obj.name1.substring(1, 4));
+        System.out.println("substring of name2 from index 0 to 3: "+obj.name2.substring(0, 3));
+        System.out.println("name in uppercase: "+obj.name.toUpperCase());
+        System.out.println("name1 in uppercase: "+obj.name1.toUpperCase());
+        System.out.println("name2 in uppercase: "+obj.name2.toUpperCase());
+        System.out.println("name in lowercase: "+obj.name.toLowerCase());
+        System.out.println("name1 in lowercase: "+obj.name1.toLowerCase());
+        System.out.println("name2 in lowercase: "+obj.name2.toLowerCase());
+        System.out.println("name after replacing 't' with 'T': "+obj.name.replace('t', 'T'));
+        System.out.println("name1 after replacing 't' with 'T': "+obj.name1.replace('t', 'T'));
+        System.out.println("name2 after replacing 't' with 'T': "+obj.name2.replace('t', 'T'));
+        System.out.println("name after trimming: "+obj.name.trim());
+        System.out.println("name1 after trimming: "+obj.name1.trim());
+        System.out.println("name2 after trimming: "+obj.name2.trim());
+        System.out.println("name after splitting: "+Arrays.toString(obj.name.split(" ")));
+        System.out.println("name1 after splitting: "+Arrays.toString(obj.name1.split(" ")));
+        System.out.println("name2 after splitting: "+Arrays.toString(obj.name2.split(" ")));
+        System.out.println("name after converting to char array: "+Arrays.toString(obj.name.toCharArray()));
+        System.out.println("name1 after converting to char array: "+Arrays.toString(obj.name1.toCharArray()));
+        System.out.println("name2 after converting to char array: "+Arrays.toString(obj.name2.toCharArray()));
+        System.out.println("name after checking if it starts with 'U': "+obj.name.startsWith("U"));
+        System.out.println("name1 after checking if it starts with 'U': "+obj.name1.startsWith("U"));
+        System.out.println("name2 after checking if it starts with 'U': "+obj.name2.startsWith("U"));
+        System.out.println("name after checking if it ends with 'a': "+obj.name.endsWith("a"));
+        System.out.println("name1 after checking if it ends with 'a': "+obj.name1.endsWith("a"));
+        System.out.println("name2 after checking if it ends with 'a': "+obj.name2.endsWith("a"));
+        System.out.println("name after checking if it contains 't': "+obj.name.contains("t"));
+        System.out.println("name1 after checking if it contains 't': "+obj.name1.contains("t"));
+        System.out.println("name2 after checking if it contains 't': "+obj.name2.contains("t"));
+        System.out.println("name after checking if it equals 'Utkarsh Gupta': "+obj.name.equals("Utkarsh Gupta"));
+        System.out.println("name1 after checking if it equals 'Utkarsh Gupta': "+obj.name1.equals("Utkarsh Gupta"));
+        System.out.println("name2 after checking if it equals 'Utkarsh Gupta': "+obj.name2.equals("Utkarsh Gupta"));
+        System.out.println("name after checking if it equalsIgnoreCase 'utkarsh gupta': "+obj.name.equalsIgnoreCase("utkarsh gupta"));
+        System.out.println("name1 after checking if it equalsIgnoreCase 'utkarsh gupta': "+obj.name1.equalsIgnoreCase("utkarsh gupta"));
+        System.out.println("name2 after checking if it equalsIgnoreCase 'utkarsh gupta': "+obj.name2.equalsIgnoreCase("utkarsh gupta"));
+        System.out.println("name after checking if it is empty: "+obj.name.isEmpty());
+        System.out.println("name1 after checking if it is empty: "+obj.name1.isEmpty());
+        System.out.println("name2 after checking if it is empty: "+obj.name2.isEmpty());
+        System.out.println("name after checking if it is blank: "+obj.name.isBlank());
+        System.out.println("name1 after checking if it is blank: "+obj.name1.isBlank());
+        System.out.println("name2 after checking if it is blank: "+obj.name2.isBlank());
+    }
+}
