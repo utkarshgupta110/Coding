@@ -590,19 +590,46 @@ Node* problem14(Node* head){
     return head;
 }
 
-// Approach-> opti, Reverse Nodes in K Group Size of LinkedList, tc-> O(N/2) & sc-> O(1)
-Node* problem18(Node* head){
-    Node* temp = head;
+// Reverse Nodes in K Group Size of LinkedList, tc-> O(2N) & sc-> O(1)
+Node* getKthNode(Node* temp, int k){
     while(temp != nullptr){
-        
+        k--;
+        if(k == 0) break;
         temp = temp->next;
+    }
+    return temp;
+}
+Node* problem18(Node* head, int k){
+    Node* temp = head;
+    Node* prevLast = nullptr; 
+    while(temp != nullptr){
+        Node* kthNode = getKthNode(temp, k);     
+        if(kthNode == nullptr){
+            if(prevLast) prevLast->next = temp;
+            break;
+        }
+        Node* nextNode = kthNode->next;
+        kthNode->next = nullptr;
+        problem6_1_2(temp); // Reverse
+        if(head == temp) head = kthNode;
+        else{
+            prevLast->next = kthNode;
+        }
+        prevLast = temp;
+        temp = nextNode;
     }
     return head;
 }
 
+// Approach-> brut, Merge two sorted Linked Lists, tc-> O(N × 2log N) & sc-> O(N)
+Node* problem19_1(Node* head1, Node* head2){
+    
+}
 
+// Approach-> opti, Merge two sorted Linked Lists, tc-> O(N × 2log N) & sc-> O(N)
+Node* problem19_2(Node* head1, Node* head2){
 
-
+}
 
 
 
@@ -613,16 +640,17 @@ int main(){
     vector<int> arr(n);
     for(int i=0; i<n; i++) cin>>arr[i];
 
-    // int n2;
-    // cin>>n2;
-    // vector<int> arr2(n2);
-    // for(int i=0; i<n2; i++) cin>>arr2[i];
+    int n2;
+    cin>>n2;
+    vector<int> arr2(n2);
+    for(int i=0; i<n2; i++) cin>>arr2[i];
 
-    // Node* head1 = convertArr2LL(arr);
-    // Node* head2 = convertArr2LL(arr2);
+    Node* head1 = convertArr2LL(arr);
+    Node* head2 = convertArr2LL(arr2);
+
+    // Node* head = convertArr2LL(arr);
+
     // Node* head = problem2(head1, head2);
-
-    Node* head = convertArr2LL(arr);
     // head = problem3_1(head);
     // head = problem3_2(head);
     // head = problem4_1(head);
@@ -650,8 +678,11 @@ int main(){
     // cout<<problem12_2(head);
     // cout<<problem13_1(head)->data;
     // cout<<problem13_2(head)->data;
-    head = problem14(head);
-    
+    // head = problem14(head);
+    // int k; cin>>k;
+    // head = problem18(head, k);
+    Node* head = problem19_1(head1, head2);  
+
     vector<int> res1 = traversal_LL(head);
     for(int i=0; i<res1.size(); i++) cout<<res1[i]<<"\t";
     return 0;
