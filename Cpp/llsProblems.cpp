@@ -621,15 +621,79 @@ Node* problem18(Node* head, int k){
     return head;
 }
 
-// Approach-> brut, Merge two sorted Linked Lists, tc-> O(N × 2log N) & sc-> O(N)
+// Approach-> brut, Merge two sorted Linked Lists, tc-> O(n1) + O(n2) + O(N logN) + O(N) & sc-> O(N) + O(N)
 Node* problem19_1(Node* head1, Node* head2){
-    
+    vector<int> arr;
+    Node* temp1 = head1;
+    Node* temp2 = head2;
+    while(temp1 != nullptr){
+        arr.push_back(temp1->data);    // O(n1)
+        temp1 = temp1->next;
+    }
+    while(temp2 != nullptr){
+        arr.push_back(temp2->data);    // O(n2)
+        temp2 = temp2->next;
+    }
+    sort(arr.begin(), arr.end());      // O(N logN), Here, N-> n1 + n2
+    Node* head = convertArr2LL(arr);   // O(N)
+    return head;
 }
 
-// Approach-> opti, Merge two sorted Linked Lists, tc-> O(N × 2log N) & sc-> O(N)
+// Approach-> opti, Merge two sorted Linked Lists, tc-> O(n1 + n2) & sc-> O(1)
 Node* problem19_2(Node* head1, Node* head2){
-
+    Node* temp1 = head1;
+    Node* temp2 = head2;
+    Node* dummyNode = new Node(-1);
+    Node* temp = dummyNode;
+    while(temp1 && temp2){
+        if(temp1->data <= temp2->data){
+            temp->next = temp1;
+            temp = temp1;
+            temp1 = temp1->next;
+        }
+        else{
+            temp->next = temp2;
+            temp = temp2;
+            temp2 = temp2->next;
+        }
+    }
+    while(temp1){
+        temp->next = temp1;
+        temp = temp1;
+        temp1 = temp1->next;
+    }
+    while(temp2){
+        temp->next = temp2;
+        temp = temp2;
+        temp2 = temp2->next;
+    }
+    return dummyNode->next;
 }
+
+// Rotate a LinkedList by k times, tc-> O(2N) & sc-> O(1)
+Node* problem20(Node* head, int k){
+    Node* temp = head;
+    int len = 1;
+    while(temp->next != nullptr){        // O(N)
+        len++;
+        temp = temp->next;
+    }
+    int rotate = k % len;
+    if(rotate == 0) return head;
+    rotate = len - rotate;
+    temp->next = head;
+    temp = head;
+    while(temp != nullptr){              // O(N) at worst case, i.e. at k = 1
+        rotate--;
+        if(rotate == 0) break;
+        temp = temp->next;
+    }
+    head = temp->next;
+    temp->next = nullptr;
+    return head;
+}
+
+
 
 
 
@@ -640,15 +704,14 @@ int main(){
     vector<int> arr(n);
     for(int i=0; i<n; i++) cin>>arr[i];
 
-    int n2;
-    cin>>n2;
-    vector<int> arr2(n2);
-    for(int i=0; i<n2; i++) cin>>arr2[i];
+    // int n2;
+    // cin>>n2;
+    // vector<int> arr2(n2);
+    // for(int i=0; i<n2; i++) cin>>arr2[i];
+    // Node* head1 = convertArr2LL(arr);
+    // Node* head2 = convertArr2LL(arr2);
 
-    Node* head1 = convertArr2LL(arr);
-    Node* head2 = convertArr2LL(arr2);
-
-    // Node* head = convertArr2LL(arr);
+    Node* head = convertArr2LL(arr);
 
     // Node* head = problem2(head1, head2);
     // head = problem3_1(head);
@@ -681,7 +744,10 @@ int main(){
     // head = problem14(head);
     // int k; cin>>k;
     // head = problem18(head, k);
-    Node* head = problem19_1(head1, head2);  
+    // Node* head = problem19_1(head1, head2);  
+    // Node* head = problem19_2(head1, head2);  
+    int k; cin>>k;
+    head = problem20(head, k);
 
     vector<int> res1 = traversal_LL(head);
     for(int i=0; i<res1.size(); i++) cout<<res1[i]<<"\t";
