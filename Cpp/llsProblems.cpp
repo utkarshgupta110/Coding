@@ -693,9 +693,23 @@ Node* problem20(Node* head, int k){
     return head;
 }
 
+// Approach-> brut, Sort a Linked List, tc-> O(2N) + O(N logN) & sc-> O(2N)
+Node* problem23_1(Node* head){
+    vector<int> arr;
+    Node* temp  = head;
+    while(temp != nullptr){
+        arr.push_back(temp->data);
+        temp = temp->next;
+    }
+    sort(arr.begin(), arr.end());
+    head = convertArr2LL(arr);
+    return head;
+}
 
-
-
+// Approach-> opti, Sort a Linked List, tc-> O(N) & sc-> O(1)
+Node* problem23_2(Node* head){
+    
+}
 
 
 int main(){
@@ -746,9 +760,11 @@ int main(){
     // head = problem18(head, k);
     // Node* head = problem19_1(head1, head2);  
     // Node* head = problem19_2(head1, head2);  
-    int k; cin>>k;
-    head = problem20(head, k);
-
+    // int k; cin>>k;
+    // head = problem20(head, k);
+    // head = problem23_1(head);
+    head = problem23_2(head);
+    
     vector<int> res1 = traversal_LL(head);
     for(int i=0; i<res1.size(); i++) cout<<res1[i]<<"\t";
     return 0;

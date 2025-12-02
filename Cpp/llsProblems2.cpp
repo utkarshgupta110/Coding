@@ -149,9 +149,22 @@ Node* problem22_2(vector<Node*> &lists){
     return head;
 }
 
-// Approach-> opti, Merge K Sorted Lists, tc-> O(N∧3) & sc-> O(1)
+// Approach-> opti, Merge K Sorted Lists, tc-> O(N∧2) & sc-> O(k)
 Node* problem22_3(vector<Node*> &lists){
-    
+    priority_queue<pair<int, Node*>, vector<pair<int, Node*>>, greater<pair<int, Node*>>> pq;
+    Node* dummyNode = new Node(-1);
+    Node* temp = dummyNode;
+    for(int i=0; i<lists.size(); i++){
+        if(lists[i]) pq.push({lists[i]->data, lists[i]});
+    }
+    while(!pq.empty()){
+        auto it = pq.top();
+        pq.pop();
+        if(it.second->child) pq.push({it.second->child->data, it.second->child});
+        temp->child = it.second;
+        temp = it.second;
+    }
+return dummyNode->child;
 }
 
 
@@ -205,7 +218,8 @@ int main(){
 
     vector<Node*> lists = listOfHeads(head1, head2, head3, head4, head5);
     // Node* head = problem22_1(lists);
-    Node* head = problem22_2(lists);
+    // Node* head = problem22_2(lists);
+    Node* head = problem22_3(lists);
 
     vector<int> res1 = traversal_LL(head);
     for(int i=0; i<res1.size(); i++) cout<<res1[i]<<" ";
