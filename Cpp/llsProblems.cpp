@@ -302,7 +302,7 @@ Node* problem7_1(Node* head){
     return temp;
 }
 
-// Approach-> opti(Hare & Tortrise Method), Find the middle of a linked list, tc-> O(N) & sc-> O(1)
+// Approach-> opti(Hare & Tortrise Method), Find the middle of a linked list, tc-> O(N/2) & sc-> O(1)
 Node* problem7_2(Node* head){
     if(head == nullptr) return head;
     Node* slow = head;
@@ -693,7 +693,7 @@ Node* problem20(Node* head, int k){
     return head;
 }
 
-// Approach-> brut, Sort a Linked List, tc-> O(2N) + O(N logN) & sc-> O(2N)
+// Approach-> brut, Sort a Linked List, tc-> O(2N) + O(N logN) & sc-> O(N)
 Node* problem23_1(Node* head){
     vector<int> arr;
     Node* temp  = head;
@@ -702,13 +702,36 @@ Node* problem23_1(Node* head){
         temp = temp->next;
     }
     sort(arr.begin(), arr.end());
-    head = convertArr2LL(arr);
+    temp = head;
+    int i = 0;
+    while(temp != nullptr){
+        temp->data = arr[i];
+        i++;
+        temp = temp->next;
+    }
     return head;
 }
 
-// Approach-> opti, Sort a Linked List, tc-> O(N) & sc-> O(1)
+// Approach-> opti, Sort a Linked List (Merge Sort), tc-> O(log N(N + N/2)) & {sc-> O(1) but O(log N) for taking recursive stack space}
+Node* findMiddle(Node* head){
+    if(head == nullptr) return head;
+    Node* slow = head;
+    Node* fast = head->next;
+    while(fast != nullptr && fast->next != nullptr){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
 Node* problem23_2(Node* head){
-    
+    if(head == nullptr || head->next == nullptr) return head;
+    Node* middle = findMiddle(head);
+    Node* leftHead = head;
+    Node* rightHead = middle->next;
+    middle->next = nullptr;
+    leftHead = problem23_2(leftHead);
+    rightHead = problem23_2(rightHead);
+    return problem19_2(leftHead, rightHead);
 }
 
 
