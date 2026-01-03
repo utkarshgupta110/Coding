@@ -19,20 +19,6 @@ bool problem1(string s){
     return st.empty();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int main(){
     string str;
     cin >> str;
