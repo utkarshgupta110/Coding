@@ -91,6 +91,59 @@ int problem7_2(int n){
     return cnt;
 }
 
+// Minimum Bit Flips to Convert Number, tc-> O(logn) & sc-> O(1)
+int problem8(int start, int goal){
+    int ans = start ^ goal;
+    return problem7_1(ans);
+}
+
+// Power Set, tc-> O(n × 2^n) & sc-> O(2^n)
+vector<vector<int>> problem9(vector<int> &arr){
+    vector<vector<int>> res;
+    int n = arr.size();
+    int subsets = 1 << n;
+    for(int num = 0; num < subsets; num++){
+        vector<int> temp;
+        for(int i = 0; i < n; i++){
+            if(num & (1 << i)) temp.push_back(arr[i]);
+        }
+        res.push_back(temp);
+    }
+    return res;
+}
+
+//  Single Number-I, tc-> O(n) & sc-> O(1)
+int problem10(vector<int> &arr){
+    int xorr = 0;
+    int n = arr.size();
+    for(int i = 0; i < n; i++) xorr = xorr ^ arr[i];
+    return xorr;
+}
+
+//  Single Number-II, tc-> O(n × 32) & sc-> O(1)
+int problem11_1(vector<int> &arr){
+    int ans = 0;
+    int n = arr.size();
+    for(int bitIndex = 0; bitIndex < 31; bitIndex++){
+        int cnt = 0;
+        for(int i = 0; i < n; i++){
+            if(arr[i] & (1 << bitIndex)) cnt++;
+        }
+        if(cnt % 3 == 1) ans = ans | (1 << bitIndex);
+    }
+    return ans;
+}
+
+//  Single Number-II, tc-> O(nlogn) + O(n/3) & sc-> O(1)
+int problem11_2(vector<int> &arr){
+    int n = arr.size();
+    sort(arr.begin(), arr.end());  // O(nlogn)
+    for(int i = 1; i < n; i+= 3){  // O(n/3)
+        if(arr[i-1] != arr[i]) return arr[i-1];
+    }
+    return arr[n-1];
+}
+
 int main(){
     int n;
     cin>>n;
@@ -115,7 +168,26 @@ int main(){
     // cout<<problem5(n);
     // cout<<problem6(n);
     // cout<<problem7_1(n);
-    cout<<problem7_2(n);
+    // cout<<problem7_2(n);
+
+    // int start, goal;
+    // cin>>start;
+    // cin>>goal;
+    // cout<<problem8(start, goal);
+
+    vector<int> arr(n);
+    for(int i = 0; i < n; i++) cin>>arr[i];
+    // vector<vector<int>> res = problem9(arr);
+    // for(int i = 0; i < res.size(); i++){
+    //     for(int j = 0; j < res[i].size(); j++){
+    //         cout<<res[i][j]<<"\t";
+    //     }
+    //     cout<<"\n";
+    // }
+    
+    // cout<<problem10(arr);
+    // cout<<problem11_1(arr);
+    cout<<problem11_2(arr);
 
     return 0;
 }
